@@ -26,3 +26,9 @@ Route::get('/contact', function () {
 });
 Route::get('/cartegory', [CartegoryController::class, 'index']);
 Route::get('/cartegory/all', [CartegoryController::class, 'get_all']);
+Route::get('/data', function (){
+   $users=DB::table('users')->get();
+    echo "<pre>";
+    print_r($users);
+    echo "</pre>";
+});
