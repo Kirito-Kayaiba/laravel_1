@@ -13,91 +13,162 @@
       </div>
     </div>
   </header>
-
   <section id="home-articles" class="py-2">
     <div class="container">
-      <h2>Editors Picks</h2>
+      <h2>Tin Hot Trong Giờ Qua</h2>
       <div class="articles-container">
         <article class="card">
-          <img src="../img/articles/ent1.jpg" alt="photo">
+          <img src="{{$data[0]->urlHinh}}" alt="photo">
           <div>
-            <div class="category category-ent">
-              Entertainment
-            </div>
-            <h3>
-              <a href="article.html">Lorem ipsum dolor sit amet.</a>
+              @if ($data[0]->idLT == 1)
+                  <div class="category category-ent">
+                      Giải trí
+                  </div>
+              @elseif ($data[0]->idLT == 2)
+                  <div class="category category-sports">
+                      Thể thao
+                  </div>
+              @elseif ($data[0]->idLT == 3)
+                  <div class="category category-tech">
+                      Công nghệ
+                  </div>
+              @endif
+              <h3>
+              <a href="article.html">{{$data[0]->tieuDe}}</a>
             </h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, facere harum dicta dolor molestias amet eos! Doloribus molestiae cum accusamus?</p>
+            <p>{{$data[0]->tomTat}}</p>
           </div>
         </article>
 
-        <article class="card bg-dark">     
-          <div class="category category-sports">
-            Sports
-          </div>
+        <article class="card bg-dark">
+          <div>
+              @if ($data[1]->idLT == 1)
+                  <div class="category category-ent">
+                      Giải trí
+                  </div>
+              @elseif ($data[1]->idLT == 2)
+                  <div class="category category-sports">
+                      Thể thao
+                  </div>
+              @elseif ($data[1]->idLT == 3)
+                  <div class="category category-tech">
+                      Công nghệ
+                  </div>
+              @endif
           <h3>
-            <a href="article.html">Lorem ipsum dolor sit amet.</a>
+            <a href="article.html">{{$data[1]->tieuDe}}</a>
           </h3>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium numquam illum ipsa corporis nemo beatae odio exercitationem vel, sit porro?</p>
-        </article>
-        
-        <article class="card">     
-          <img src="../img/articles/tech1.jpg" alt="photo">
-          <div class="category category-tech">
-            Technology
-          </div>
-          <h3>
-            <a href="article.html">Lorem ipsum dolor sit amet.</a>
-          </h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita quam quibusdam ipsum nemo maiores. Cum ipsa amet quaerat sunt.</p>
-        </article>
-        
-        <article class="card">     
-          <div class="category category-sports">
-            Sports
-          </div>
-          <h3>
-            <a href="article.html">Lorem ipsum dolor sit amet.</a>
-          </h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita quam quibusdam ipsum nemo maiores. Cum ipsa amet quaerat sunt.</p>
-          <img src="../img/articles/sports1.jpg" alt="photo">
+          <p>{{$data[1]->tomTat}}</p>
         </article>
 
-        <article class="card">     
-          <img src="../img/articles/tech2.jpg" alt="photo">
-          <div class="category category-tech">
-            Technology
-          </div>
+        <article class="card">
+          <img src="{{$data[2]->urlHinh}}" alt="photo">
+          @if ($data[2]->idLT == 1)
+              <div class="category category-ent">
+                  Giải trí
+              </div>
+          @elseif ($data[2]->idLT == 2)
+              <div class="category category-sports">
+                  Thể thao
+              </div>
+          @elseif ($data[2]->idLT == 3)
+              <div class="category category-tech">
+                  Công nghệ
+              </div>
+          @endif
           <h3>
-            <a href="article.html">Lorem ipsum dolor sit amet.</a>
+            <a href="article.html">{{$data[2]->tieuDe}}</a>
           </h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum expedita quam quibusdam ipsum nemo maiores. Cum ipsa amet quaerat sunt.</p>
+          <p>{{$data[2]->tomTat}}</p>
+        </article>
+
+        <article class="card">
+          <div>
+              @if ($data[3]->idLT == 1)
+                  <div class="category category-ent">
+                      Giải trí
+                  </div>
+              @elseif ($data[3]->idLT == 2)
+                  <div class="category category-sports">
+                      Thể thao
+                  </div>
+              @elseif ($data[3]->idLT == 3)
+                  <div class="category category-tech">
+                      Công nghệ
+                  </div>
+              @endif
+          <h3>
+            <a href="article.html">{{$data[3]->tieuDe}}</a>
+          </h3>
+          <p>{{$data[3]->tomTat}}</p>
+          <img src="{{$data[3]->urlHinh}}" alt="photo">
+        </article>
+
+        <article class="card">
+          <img src="{{$data[4]->urlHinh}}" alt="photo">
+          <div>
+              @if ($data[4]->idLT == 1)
+                  <div class="category category-ent">
+                      Giải trí
+                  </div>
+              @elseif ($data[4]->idLT == 2)
+                  <div class="category category-sports">
+                      Thể thao
+                  </div>
+              @elseif ($data[4]->idLT == 3)
+                  <div class="category category-tech">
+                      Công nghệ
+                  </div>
+              @endif
+          <h3>
+            <a href="article.html">{{$data[4]->tieuDe}}</a>
+          </h3>
+          <p>{{$data[4]->tomTat}}</p>
           </article>
 
-          <article class="card bg-primary">     
-            <div class="category category-sports">
-              Sports
-            </div>
+          <article class="card bg-primary">
+            @if ($data[5]->idLT == 1)
+                <div class="category category-ent">
+                    Giải trí
+                </div>
+            @elseif ($data[5]->idLT == 2)
+                <div class="category category-sports">
+                    Thể thao
+                </div>
+            @elseif ($data[5]->idLT == 3)
+                <div class="category category-tech">
+                    Công nghệ
+                </div>
+            @endif
             <h3>
-              <a href="article.html">Lorem ipsum dolor sit amet.</a>
+              <a href="article.html">{{$data[5]->tieuDe}}</a>
             </h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium numquam illum ipsa corporis nemo beatae odio exercitationem vel, sit porro?</p>
+            <p>{{$data[5]->tomTat}}</p>
           </article>
 
           <article class="card">
             <div>
-              <div class="category category-ent">
-                Entertainment
-              </div>
+                @if ($data[6]->idLT == 1)
+                    <div class="category category-ent">
+                        Giải trí
+                    </div>
+                @elseif ($data[6]->idLT == 2)
+                    <div class="category category-sports">
+                        Thể thao
+                    </div>
+                @elseif ($data[6]->idLT == 3)
+                    <div class="category category-tech">
+                        Công nghệ
+                    </div>
+                @endif
               <h3>
-                <a href="article.html">Lorem ipsum dolor sit amet.</a>
+                <a href="article.html">{{$data[6]->tieuDe}}</a>
               </h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, facere harum dicta dolor molestias amet eos! Doloribus molestiae cum accusamus?</p>
+              <p>{{$data[6]->tomTat}}</p>
             </div>
-            <img src="../img/articles/ent2.jpg" alt="photo">
+            <img src="{{$data[6]->urlHinh}}" alt="photo">
           </article>
       </div>
     </div>
   </section>
   @endsection
-  

@@ -190,12 +190,36 @@ h1,h2,h3,h4,h5,h6{
   background: var(--light-color);
   color: var(--dark-color);
 }
-#main-nav .social{
-  justify-self: center;
+.search-form {
+  display: flex;
+  align-items: center;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 5rem;
 }
-#main-nav .social i{
-  color: #777;
-  margin-right: 0.5rem;
+
+.search-form input[type="text"] {
+  flex:1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.search-form button[type="submit"] {
+  background-color: #c72727;
+  color: white;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.search-form button[type="submit"]:hover {
+  background-color: #d04242;
 }
 
 /* Showcase */

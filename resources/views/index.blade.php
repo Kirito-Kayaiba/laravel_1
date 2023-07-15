@@ -17,16 +17,17 @@
   <nav id="main-nav">
     <div class="container">
       <img src="../img/logo.png" alt="NewsMedia" class="logo">
-      <div class = 'social'>
-        <a href="http://facebook.com.br" target = 'blank'><i class="fab fa-facebook fa-2x"></i></a>
-        <a href="http://twitter.com.br" target = 'blank'><i class="fab fa-twitter fa-2x"></i></a>
-        <a href="http://instagram.com.br" target = 'blank'><i class="fab fa-instagram fa-2x"></i></a>
-        <a href="http://youtube.com.br" target = 'blank'><i class="fab fa-youtube fa-2x"></i></a>
-      </div>
       <ul>
-        <li><a href="index.html" class="current">Home</a></li>
-        <li><a href="about.html" >About</a></li>
+        <li><a href="/index" class="current">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/danhmuc">Category</a></li>
       </ul>
+      <div class = 'social'>
+        <form class="search-form" action="search.php" method="get">
+          <input type="text" name="q" placeholder="Search...">
+          <button type="submit">Search</button>
+        </form>
+      </div>
     </div>
   </nav>
  @yield('content')
