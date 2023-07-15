@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartegoryController;
-
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,20 +15,5 @@ use App\Http\Controllers\CartegoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/about', function () {
-    echo"đây là trang giới thiệu";
-});
-Route::get('/contact', function () {
-    return view('contact');
-});
-Route::get('/cartegory', [CartegoryController::class, 'index']);
-Route::get('/cartegory/all', [CartegoryController::class, 'get_all']);
-Route::get('/data', function (){
-   $users=DB::table('users')->get();
-    echo "<pre>";
-    print_r($users);
-    echo "</pre>";
-});
+Route::get('/', [HomeController::class, 'index']);
+?>
