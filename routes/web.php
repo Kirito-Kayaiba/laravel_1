@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartegoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TinController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\DanhMucController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +19,11 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'index']);
-
+Route::get('/tin/{id}', [TinController::class, 'tin']);
+Route::get('/search', [SearchController::class, 'search']);
+Route::get('/search/moinhat', [SearchController::class, 'moinhat']);
+Route::get('/search/hot', [SearchController::class, 'hot']);
+Route::get('/danhmuc/{id}', [DanhMucController::class, 'danhmuc']);
+Route::get('/danhmuc/hot/{id}', [DanhMucController::class, 'hot']);
+Route::get('/danhmuc/moinhat/{id}', [DanhMucController::class, 'moinhat']);
 ?>

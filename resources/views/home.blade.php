@@ -34,7 +34,7 @@
                   </div>
               @endif
               <h3>
-              <a href="article.html">{{$data[0]->tieuDe}}</a>
+              <a href="/tin/{{$data[0]->id}}">{{$data[0]->tieuDe}}</a>
             </h3>
             <p>{{$data[0]->tomTat}}</p>
           </div>
@@ -56,7 +56,7 @@
                   </div>
               @endif
           <h3>
-            <a href="article.html">{{$data[1]->tieuDe}}</a>
+            <a href="/tin/{{$data[1]->id}}">{{$data[1]->tieuDe}}</a>
           </h3>
           <p>{{$data[1]->tomTat}}</p>
         </article>
@@ -77,7 +77,7 @@
               </div>
           @endif
           <h3>
-            <a href="article.html">{{$data[2]->tieuDe}}</a>
+            <a href="/tin/{{$data[2]->id}}">{{$data[2]->tieuDe}}</a>
           </h3>
           <p>{{$data[2]->tomTat}}</p>
         </article>
@@ -98,7 +98,7 @@
                   </div>
               @endif
           <h3>
-            <a href="article.html">{{$data[3]->tieuDe}}</a>
+            <a href="/tin/{{$data[3]->id}}">{{$data[3]->tieuDe}}</a>
           </h3>
           <p>{{$data[3]->tomTat}}</p>
           <img src="{{$data[3]->urlHinh}}" alt="photo">
@@ -121,7 +121,7 @@
                   </div>
               @endif
           <h3>
-            <a href="article.html">{{$data[4]->tieuDe}}</a>
+            <a href="/tin/{{$data[4]->id}}">{{$data[4]->tieuDe}}</a>
           </h3>
           <p>{{$data[4]->tomTat}}</p>
           </article>
@@ -141,7 +141,7 @@
                 </div>
             @endif
             <h3>
-              <a href="article.html">{{$data[5]->tieuDe}}</a>
+              <a href="/tin/{{$data[5]->id}}">{{$data[5]->tieuDe}}</a>
             </h3>
             <p>{{$data[5]->tomTat}}</p>
           </article>
@@ -162,7 +162,7 @@
                     </div>
                 @endif
               <h3>
-                <a href="article.html">{{$data[6]->tieuDe}}</a>
+                <a href="/tin/{{$data[6]->id}}">{{$data[6]->tieuDe}}</a>
               </h3>
               <p>{{$data[6]->tomTat}}</p>
             </div>
