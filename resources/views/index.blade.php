@@ -33,10 +33,15 @@
         <li><a href="/" class="current">Home</a></li>
         <li><a href="/about">About</a></li>
       </ul>
-      <div class = 'social'>
+      <div class ='social'>
         <form class="search-form" action="/search" method="get">
           <input type="text" name="request" placeholder="Search...">
           <button type="submit">Search</button>
+          @if(Auth::check())
+          <a style="margin-left:50px; border-radius:20%; background-color:white;padding:12px;text-align: center;" href="/trangcanhan" ><i class="fa-solid fa-user"></i>{{Auth::user()->name}}</a>
+          @else
+          <a style="margin-left:50px; border-radius:20%; background-color:white;padding:12px;text-align: center;" href="/login" ><i class="fa-solid fa-user"></i>Login</a>
+          @endif
         </form>
       </div>
     </div>
