@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::get('/dashboard', function () {
+    return redirect('/');
+})->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('danhmuc/{id}', [\App\Http\Controllers\DanhMucController::class, 'danhmuc']);
 Route::get('danhmuc/moinhat/{id}', [\App\Http\Controllers\DanhMucController::class, 'moinhat']);
@@ -23,15 +25,18 @@ Route::get('search/moinhat', [\App\Http\Controllers\SearchController::class, 'mo
 Route::get('search/hot', [\App\Http\Controllers\SearchController::class, 'hot']);
 Route::get('tin/{id}', [\App\Http\Controllers\TinController::class, 'tin']);
 Route::get('danhmuc/tin/{id}', [\App\Http\Controllers\TinController::class, 'tin']);
-Route::get('admin/quanlytintuc', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'index'])->middleware('auth');
-Route::get('admin/quanlytintuc/sua/{id}', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'sua'])->middleware('auth');
-Route::post('admin/quanlytintuc/sua/{id}', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'update'])->middleware('auth');
-Route::get('/dashboard', function () {
-    return redirect('/');
-})->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('admin/quanlytintuc/xoa/{id}', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'xoa'])->middleware('auth');
 Route::get('admin/quanlytintuc/them', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'them'])->middleware('auth');
 Route::post('admin/quanlytintuc/them', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'store'])->middleware('auth');
+Route::get('admin/quanlytintuc', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'index'])->middleware('auth');
+Route::group(['middleware' => 'check.article.access'], function () {
+Route::get('admin/quanlytintuc/sua/{id}', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'sua'])->middleware('auth');
+Route::post('admin/quanlytintuc/sua/{id}', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'update'])->middleware('auth');
+
+Route::get('admin/quanlytintuc/xoa/{id}', [\App\Http\Controllers\AdminQuanLyTinTucController::class, 'xoa'])->middleware('auth');
+});
+Route::get('unauthorized', function () {
+    return response('Unauthorized', 401);
+})->name('unauthorized');
 Route::get('trangcanhan', [\App\Http\Controllers\TrangCaNhanController::class, 'index'])->middleware('auth');
 Route::get('trangcanhan/dangkycongtacvien', [\App\Http\Controllers\TrangCaNhanController::class, 'dangkycongtacvien'])->middleware('auth');
 Route::get('admin/setting', [\App\Http\Controllers\AdminSettingController::class, 'index'])->middleware('auth');
@@ -55,6 +60,13 @@ Route::group(['middleware' => 'check.admin.role'], function () {
     Route::get('admin/bieudobaiviet/getdata', [\App\Http\Controllers\AdminHomeController::class, 'getdata']);
 
 });
+
+Route::post('/admin/setting/muagoisolandangbai', [\App\Http\Controllers\AdminSettingController::class, 'muagoisolandangbai'])->middleware('auth');
+Route::get('admin/setting/verify/goisolandangbai', [\App\Http\Controllers\AdminSettingController::class, 'goisolandangbai'])->middleware('auth'); 
+
+Route::post('/admin/setting/muagoithangdangbai', [\App\Http\Controllers\AdminSettingController::class, 'muagoithangdangbai'])->middleware('auth');
+Route::get('admin/setting/verify/goithangdangbai', [\App\Http\Controllers\AdminSettingController::class, 'goithangdangbai'])->middleware('auth');
+Route::post('/chat', 'ChatController@sendMessage');
 Route::post('admin/setting/muagoitichxanh', [\App\Http\Controllers\AdminSettingController::class, 'muagoitichxanh'])->middleware('auth');
 Route::get('admin/setting/verify', [\App\Http\Controllers\AdminSettingController::class, 'verify'])->middleware('auth');
 

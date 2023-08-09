@@ -11,8 +11,10 @@ class AdminSettingController extends Controller
 {
     public function index()
     {
+        $expirationDate = Carbon::parse(\Auth::user()->expiration_date);
+        $isExpired = $expirationDate < now();
         $accountSetting = \DB::table('users')->where('id', auth()->user()->id)->first();
-        return view('Admin.setting', compact('accountSetting'));
+        return view('Admin.setting', compact('accountSetting', 'expirationDate', 'isExpired'));
     }
     public function update(Request $request)
     {
@@ -74,7 +76,7 @@ class AdminSettingController extends Controller
         $accessKey = 'klm05TvNBzhg7h7j';
         $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
         $orderInfo = "Thanh toán qua MoMo";
-        $amount = "100000";
+        $amount = "1000000000";
         $orderId = time() ."";
         $redirectUrl = "http://127.0.0.1:8000/admin/setting/verify";
         $ipnUrl = "http://127.0.0.1:8000/admin/setting";
@@ -111,5 +113,100 @@ class AdminSettingController extends Controller
         $user->veryfi = 1;
         $user->save();
         return redirect('admin/setting')->with('success', 'Đăng ký thành công');
+    }
+    public function muagoisolandangbai(Request $request)
+    {
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+        $partnerCode = 'MOMOBKUN20180529';
+        $accessKey = 'klm05TvNBzhg7h7j';
+        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+        $orderInfo = "Thanh toán qua MoMo";
+        $amount = "69000";
+        $orderId = time() ."";
+        $redirectUrl = "http://127.0.0.1:8000/admin/setting/verify/goisolandangbai";
+        $ipnUrl = "http://127.0.0.1:8000/admin/setting";
+        $extraData = "";
+
+
+        $requestId = time() . "";
+        $requestType = "payWithATM";
+        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array('partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature);
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);  // decode json
+        return redirect()->to($jsonResult['payUrl']);
+    }
+    public function goisolandangbai(Request $request)
+    {
+        $id_user = auth()->user()->id;
+        $user = User::find($id_user);
+        //so_lan_dang_bai được cộng thêm 30
+        $user->so_lan_dang_bai = $user->so_lan_dang_bai + 30;
+        $user->save();
+        return redirect('admin/setting')->with('success', 'Đăng ký thành công');
+    }
+    public function muagoithangdangbai(Request $request)
+    {
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+        $partnerCode = 'MOMOBKUN20180529';
+        $accessKey = 'klm05TvNBzhg7h7j';
+        $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
+        $orderInfo = "Thanh toán qua MoMo";
+        $amount = "300000";
+        $orderId = time() ."";
+        $redirectUrl = "http://127.0.0.1:8000/admin/setting/verify/goithangdangbai";
+        $ipnUrl = "http://127.0.0.1:8000/admin/setting";
+        $extraData = "";
+
+
+        $requestId = time() . "";
+        $requestType = "payWithATM";
+        // $extraData = ($_POST["extraData"] ? $_POST["extraData"] : "");
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
+        $data = array('partnerCode' => $partnerCode,
+            'partnerName' => "Test",
+            "storeId" => "MomoTestStore",
+            'requestId' => $requestId,
+            'amount' => $amount,
+            'orderId' => $orderId,
+            'orderInfo' => $orderInfo,
+            'redirectUrl' => $redirectUrl,
+            'ipnUrl' => $ipnUrl,
+            'lang' => 'vi',
+            'extraData' => $extraData,
+            'requestType' => $requestType,
+            'signature' => $signature);
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);  // decode json
+        return redirect()->to($jsonResult['payUrl']);
+    }
+    public function goithangdangbai(Request $request)
+    {
+        $user = \Auth::user();
+    
+        // Logic xác định thời gian gia hạn, ví dụ: +30 ngày từ ngày hiện tại
+        $expirationDate = now()->addDays(30);
+        
+        $user->expiration_date = $expirationDate;
+        $user->save();
+    
+        return redirect()->back()->with('success', 'Tài khoản của bạn đã được gia hạn thành công.');
     }
 }

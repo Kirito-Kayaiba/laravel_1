@@ -12,7 +12,7 @@ class TrangCaNhanController extends Controller
             $danhmuc = \DB::table('loaitin')->get();
             return view('/trangcanhan', ['danhmuc' => $danhmuc]);
         }elseif(auth()->user()->role >= 2){
-            return redirect('/admin/trangchu');
+            return redirect('/admin/quanlytintuc');
         }
     }
     public function dangkycongtacvien(){

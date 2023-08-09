@@ -9,6 +9,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         // Các middleware khác
         'check.admin.role' => \App\Http\Middleware\CheckAdminRole::class,
+        'check.article.access' => \App\Http\Middleware\CheckArticleAccessMiddleware::class,
     ];    
     /**
      * The application's global HTTP middleware stack.

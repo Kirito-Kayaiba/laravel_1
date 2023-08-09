@@ -45,6 +45,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
+        @if(session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          {{ session('error') }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
         <table class="table table-striped mt-3 align-middle">
           <thead>
             <tr class="text-center ">
@@ -66,6 +72,13 @@
               <td class="align-middle">
                 <h6 class="font-weight-bold" style="color: var(--dark)">{{$tt->tieuDe}}</h6>
                 <p class="" style="color: var(--dark-light);">{{$tt->tomTat = substr($tt->tomTat, 0, 150)}}...</p>
+                @php
+                $id_user = $tt->id_user;
+                $gmail = DB::table('users')->where('id', $id_user)->value('email');
+                @endphp
+                @if(Auth::user()->role == 3)
+                <p class="" style="color: var(--dark-light);">Người đăng: {{$gmail}}</p>
+                @endif
               </td>
               <td class="align-middle" style="color: var(--dark)">{{$tt->created_at}}</td>
               <td class="align-middle text-center" style="color: var(--dark)">{{$tt->xem}}</td>

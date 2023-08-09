@@ -1,16 +1,16 @@
 <?php
   require_once 'connect.php';
-  $max_date = $_GET['days'];
+  //http://127.0.0.1:8000/admin/bieudobaiviet/getdata
+  $max_date = 30; //$_GET['days'];
   $sql = "SELECT
     users.id as 'user_id',
-    users.name as 'user_name',
+    users.email as 'user_name',
     DATE_FORMAT(tin.created_at, '%e-%m') as 'ngay', 
     COUNT(*) as 'so_tin_dang'
   FROM `tin`
-  JOIN users ON tin.id = users.id
+  JOIN users ON tin.id_user = users.id
   WHERE tin.created_at >= CURDATE() - INTERVAL $max_date DAY
   GROUP BY users.id, DATE_FORMAT(tin.created_at, '%e-%m')";
-  
   $result = mysqli_query($conn, $sql);
   
   $arr = [];

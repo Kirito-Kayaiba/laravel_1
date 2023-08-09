@@ -26,24 +26,28 @@
       <span class="text">Admin</span>
     </a>
     <ul class="side-menu top">
+      @if(Auth::user()->role == 3)
       <li class="active">
         <a href="/admin/trangchu">
           <i class='bx bxs-dashboard'></i>
           <span class="text">Trang Chủ</span>
         </a>
       </li>
+      @endif
       <li>
         <a href="/admin/quanlytintuc">
           <i class='bx bxs-shopping-bag-alt'></i>
           <span class="text">Quản Lý Tin Tức</span>
         </a>
       </li>
+      @if(Auth::user()->role == 3)
       <li>
         <a href="/admin/quanlynguoidung">
           <i class=' bx bxs-group'></i>
           <span class="text">Quản Lý người dùng</span>
         </a>
       </li>
+      @endif
       <li>
         <a href="#">
           <i class='bx bxs-message-dots'></i>

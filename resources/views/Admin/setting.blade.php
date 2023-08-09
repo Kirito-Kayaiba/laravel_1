@@ -67,6 +67,19 @@
           <button type="submit" class="btn btn-primary">Save Changes</button>
         </form>
         <hr>
+        @if(Auth::user()->role <= 2)
+        <form class="form-container" action="" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="so_lan_dang_bai" style="color: var(--dark)">Số lần đăng bài còn lại:</label>
+            <input type="text" class="form-control" id="so_lan_dang_bai" name="so_lan_dang_bai" value="{{ $accountSetting->so_lan_dang_bai}}" disabled>
+          </div>          
+          <div class="form-group">
+            <label for="so_ngay_dang_bai" style="color: var(--dark)"> {{ $isExpired ? 'Tài khoản của bạn đã hết thời gian đăng bài' : 'Thời hạn gia hạn: ' . $expirationDate->format('d/m/Y') }}</label>
+            <input type="hidden" class="form-control" id="so_ngay_dang_bai" name="so_ngay_dang_bai" value="{{ $accountSetting->so_ngay_dang_bai}">
+          </div>
+        </form>
+        @endif
+        <hr>
         @if($accountSetting->veryfi == 0)
         <div class="container mt-5">
           <div class="row">
@@ -104,6 +117,52 @@
                   <button type="button" class="btn btn-primary"><a style="color:var(--light)" href="">Đã đăng
                       ký</a></button>
                   @endif
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        @endif
+
+
+
+
+
+        @if(Auth::user()->role <= 2)
+        <div class="container mt-5">
+          <div class="row">
+            <!-- Cột bên trái -->
+            <div class="col-md-6">
+              <div class="card">
+                <img
+                  src="https://hocban.vn/wp-content/uploads/2017/01/Blog-va-cuoc-song-featured-Image.png"
+                  class="card-img-top" alt="Mua đăng bài">
+                <div class="card-body text-center">
+                  <h1 class="card-title">Mua Gói 30 lần đăng bài</h1>
+                  <p class="card-text">69.000đ</p>
+                  <form action="/admin/setting/muagoisolandangbai" method="POST">
+                    @csrf
+                    <input type="hidden" name="total_momo_solan" value="">
+                    <button type="submit" class="btn btn-primary" name="payUrl">Mua ngay</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cột bên phải -->
+            <div class="col-md-6">
+              <div class="card">
+                <img
+                  src="https://hocban.vn/wp-content/uploads/2017/01/Blog-va-cuoc-song-featured-Image.png"
+                  class="card-img-top" alt="Mua Đăng bài">
+                <div class="card-body text-center">
+                  <h1 class="card-title">Mua Gói Đăng Bài 30 Ngày</h1>
+                  <p class="card-text">300.000đ</p>
+                  <form action="/admin/setting/muagoithangdangbai" method="POST">
+                    @csrf
+                    <input type="hidden" name="total_momo_sothang" value="">
+                    <button type="submit" class="btn btn-primary" name="payUrl">Mua ngay</button>
+                  </form>
                 </div>
               </div>
             </div>

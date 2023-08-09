@@ -282,7 +282,7 @@
           },
           title: {
             align: 'center',
-            text: 'Thống Kê Doanh Thu trong_' + days+'_ngày',
+            text: 'Thống Kê số bài viết trong_' + days+'_ngày',
           },
           subtitle: {
             align: 'left',
@@ -309,14 +309,14 @@
               borderWidth: 0,
               dataLabels: {
                 enabled: true,
-                format: '{point.y:.f}VNĐ'
+                format: '{point.y:.f} Post'
               }
             }
           },
 
           tooltip: {
             headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.f}</b>VNĐ<br/>'
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.f}</b>POST<br/>'
           },
 
           series: [{
